@@ -66,11 +66,11 @@
 
     19. `sp_growth.boot.RData`: confidence itervals of 95th percetile of growth rates of species across all stands
 
-    20. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands
+    20. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands (too heavy)
 
-    21. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands
+    21. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands (too heavy)
 
-    22. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands
+    22. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands (too heavy)
 
     23. `stand_dev_us.rds`: plot-level information of development status across all stands
 
