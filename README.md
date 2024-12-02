@@ -2,7 +2,7 @@
 ---
 ---
 
-### This repository contains all files related to the analyses performed for the manuscript "Disturbance constrains the growth-survival trade-off across temperate tree species", lead by Kauane M. Bordin and co-authors.
+### This repository contains all files related to the analyses performed for the manuscript "Disturbance constrains the growth-survival trade-off across temperate tree species", led by Kauane M. Bordin and co-authors.
 
 #### *Content of the repository:*
 
