@@ -85,3 +85,36 @@
     3.  `figure3.png`: Figure 3
 
     4.  `early_and_late_developm.png`: Figure 4
+
+    5.  `species_summary.rtf`: Appendix 1
+
+    6.  `sp.level.predicts.zerogr_all.png`, `sp.level.predicts.zerogr_EARLY.png`, `sp.level.predicts.zerogr_LATE.png`: Appendix 2 to 4
+
+        1.  `data.total.csv`: data frame with all the results dataset (see below)
+
+            | Variable              | README                                                                                |
+            |---------------------|---------------------------------------------------|
+            | group                 | phylogenetic clade (Angiosperm or Gymnosperm)                                         |
+            | family                | Family                                                                                |
+            | genus                 | Genus                                                                                 |
+            | sp                    | Species                                                                               |
+            | all.mort.prob         | Mortality probability at zero growth for all species                                  |
+            | all.lower.mort.prob   | 2.5% of mortality probability at zero growth for all species                          |
+            | all.upper.mort.prob   | 97.5% of mortality probability at zero growth for all species                         |
+            | all.95gr              | 95th quantile of growth for all species                                               |
+            | all.lower.gr          | 2.5% of 95th quantile of growth for all species                                       |
+            | all.upper.gr          | 97.5% of 95th quantile of growth for all species                                      |
+            | late.mort.prob        | Mortality probability at zero growth for species in late development stands           |
+            | late.lower.mort.prob  | 2.5% of mortality probability at zero growth for species in late development stands   |
+            | late.upper.mort.prob  | 97.5% of mortality probability at zero growth for species in late development stands  |
+            | late.95gr             | 95th quantile of growth for species in late development stands                        |
+            | late.sd.gr            | Standard deviation of 95th quantile of growth for species in late development stands  |
+            | late.upper.gr         | 97.5% of 95th quantile of growth for species in late development stands               |
+            | late.lower.gr         | 2.5% of 95th quantile of growth for species in late development stands                |
+            | early.mort.prob       | Mortality probability at zero growth for species in early development stands          |
+            | early.lower.mort.prob | 2.5% of mortality probability at zero growth for species in early development stands  |
+            | early.upper.mort.prob | 97.5% of mortality probability at zero growth for species in early development stands |
+            | early.95gr            | 95th quantile of growth for species in early development stands                       |
+            | early.sd.gr           | Standard deviation of 95th quantile of growth for species in early development stands |
+            | early.upper.gr        | 97.5% of 95th quantile of growth for species in early development stands              |
+            | early.lower.gr        | 2.5% of 95th quantile of growth for species in early development stands               |
