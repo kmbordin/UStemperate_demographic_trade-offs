@@ -147,7 +147,7 @@ f2 <- figure +
   theme(legend.position = "bottom",
         text = element_text(size=10))+
   labs (y= "Annual mortality probability \nat zero growth",
-        x="Maximum growth")+
+        x="Maximum growth (cm yr-¹)")+
   ylim(0,0.5)+ 
   scale_colour_manual(values = c("#009E73"))
 
@@ -166,7 +166,7 @@ angio.1 <- ggplot() +
   geom_point(angio, mapping = aes(x= gr.95th, y= pred_sp_m_invl, color="#009E73"), size=2) +
   my_theme+
   scale_colour_manual(values = c( "#009E73"))+
-  labs(x="Maximum growth", y="Annual mortality \nprobability at zero growth",title = "Angiosperms")+
+  labs(x="Maximum growth (cm yr-¹)", y="Annual mortality \nprobability at zero growth",title = "Angiosperms")+
   ylim(0,0.5)+
   annotate("text", x = 1.6, y = 0.5, label = "SMA slope = 0.38", hjust = 1)+
   annotate("text", x = 1.6, y = 0.46, label = "R² = 0.06",hjust = 1)+
@@ -182,7 +182,7 @@ gimno.1 <- ggplot()+
   my_theme+
   #ylim(0,0.32)+
   scale_colour_manual(values = c( "#D55E00"))+
-  labs(x="Maximum growth", y="Annual mortality \nprobability at zero growth",title = "Gymnosperms")+
+  labs(x="Maximum growth (cm yr-¹)", y="Annual mortality \nprobability at zero growth",title = "Gymnosperms")+
   ylim(0,0.5)+
   annotate("text", x = 1.6, y = 0.5, label = "SMA slope = 0.24", hjust = 1)+
   annotate("text", x = 1.6, y = 0.46, label = "R² = 0.09",hjust = 1)+
@@ -223,7 +223,7 @@ p2 <- ggplot()+
   my_theme+  ylim(0,0.5)+xlim(0.3,1.75)+
   stat_ma_line(method = "SMA", se=TRUE, colour="black")+
   scale_colour_manual(values = c("#009E73", "#D55E00"))+
-  labs(x="Maximum growth", y="Annual mortality \nprobability at zero growth", title = "Late development")+
+  labs(x="Maximum growth (cm yr-¹)", y="Annual mortality \nprobability at zero growth", title = "Late development")+
   annotate("text", x = 1.75, y = 0.5, label = "SMA slope = 0.35", hjust = 1)+
   annotate("text", x = 1.75, y = 0.46, label = "R² = 0.07",hjust = 1)+
   annotate("text", x = 1.75, y = 0.42, label = "p-value = 0.07",hjust = 1)+
@@ -240,7 +240,7 @@ p4 <- ggplot(gr.test, aes(x = variable, y = value, group=sp.early)) +
   geom_line(aes(color = group)) + 
   geom_point(size = 3, aes(color = group)) + 
   my_theme+ 
-  labs(x="Stand development", y="Maximum growth")+
+  labs(x="Stand development", y="Maximum growth (cm yr-¹)")+
   annotate("text", x = 1, y = 1.95, label = "*",
            colour = "black", size=6, hjust = 0)+
   scale_colour_manual(values = c("#009E73", "#D55E00"))
