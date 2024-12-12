@@ -5,7 +5,7 @@
 ### This repository contains all files related to the analyses performed for the manuscript "Disturbance constrains the growth-survival trade-off for temperate tree species", led by Kauane M. Bordin and co-authors.
 
 Important information: the raw data is openly available at https://research.fs.usda.gov/products/dataandtools/tools/fia-datamart
-For this manusctipt's purposes, the processed data was standardised and harmonised in the context of the TreeMort project (https://more.bham.ac.uk/treemort/).
+For this manuscript's purposes, the processed data was standardised and harmonised in the context of the TreeMort project (https://more.bham.ac.uk/treemort/).
 
 #### *Content of the repository:*
 
