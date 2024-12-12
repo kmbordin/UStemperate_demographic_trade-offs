@@ -6,8 +6,6 @@
 load("rdata/census1to3.data.RData")
 df <- data.frame(tag = census1$tmt.tree.id, 
                  sp = census1$species.cor, 
-                 gx = census1$tree.coord.x, 
-                 gy = census1$tree.coord.y, 
                  dbh1 = census1$d, 
                  dbh2 = census2$d, 
                  dbh3 = census3$d,
