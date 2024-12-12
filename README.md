@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/892592324.svg)](https://doi.org/10.5281/zenodo.14402211)
+
 ---
 ---
 ---
