@@ -4,25 +4,25 @@
 
 # New dataframe to be used -----
 load("rdata/census1to3.data.RData")
-df <- data.frame(tag = census1$tmt.tree.id, 
-                 sp = census1$species.cor, 
-                 dbh1 = census1$d, 
+df <- data.frame(tag = census1$tmt.tree.id, #treeid
+                 sp = census1$species.cor,  #species
+                 dbh1 = census1$d, #diameter in mm
                  dbh2 = census2$d, 
                  dbh3 = census3$d,
-                 ba1 = census1$ba,
+                 ba1 = census1$ba, #basal area
                  ba2 = census2$ba,
                  ba3 = census3$ba,
-                 date1 = census1$census.date, 
+                 date1 = census1$census.date, #census date
                  date2 = census2$census.date, 
                  date3 = census3$census.date, 
-                 pom1 = census1$pom, 
+                 pom1 = census1$pom, #point of measurement
                  pom2 = census2$pom, 
                  pom3 = census3$pom, 
                  DFstatus1 = census1$tree.status, 
                  DFstatus2 = census2$tree.status, 
                  DFstatus3 = census3$tree.status, #0= alive; 1= dead
-                 database.code = census1$database.code,
-                 plot.id = census1$tmt.plot.id)
+                 database.code = census1$database.code, #code
+                 plot.id = census1$tmt.plot.id) #plot.id
 
 df <- df %>%
   mutate(pom1 = as.numeric(pom1),
@@ -55,10 +55,8 @@ live <- subset(live, good2); print(dim(live))
 
 time <- (live$date2-live$date1) #time interval
 growth.dbh <- (live$dbh2-live$dbh1)/time #growth in dbh
-growth.ba <- (live$ba2-live$ba1)/time #growth in basal area
-pctred <-live$dbh2/live$dbh1
 
-growth <-data.frame(live, time=time, growth.dbh = growth.dbh, growth.ba=growth.ba, pctred=pctred)
+growth <-data.frame(live, time=time, growth.dbh = growth.dbh)
 
 # Growth transformation ----- 
 skewness(growth$growth.dbh[growth$growth.dbh >= 0]^0.5)
