@@ -42,7 +42,7 @@ parameters {
   cholesky_factor_corr[3] L_u_sp; 
 
   vector[n_plot] a_plot_z; 
-  vector[n_interval] a_interval_z; 
+  //vector[n_interval] a_interval_z; 
   
   // Hyperparameters:
   real a;
