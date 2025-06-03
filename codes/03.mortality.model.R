@@ -134,7 +134,7 @@ post <- mod2 %>%
 
 # model early developed forests -----
 rm(list = ls())
-# load("R Data/data_early_succ.RData")
+# load("rdata/data_early_succ_25.RData")
 data_std <- data_early
 data_std$dbh <- as.numeric(scale(data_std$dbh))
 data_std$gr <- as.numeric(scale(data_std$gr))
@@ -160,9 +160,9 @@ mod_early <- stan(file = "codes/stan_model_for_mortality_probability.stan",
                   init = 0) # does the trick to avoid getting "rejecting initial values" message problems
 
 mod_early %<>% recover_types(data_early) # retrieve original sp and plot names
-
+#save(mod_early, file="rdata/stan_mort_mod_output_nc_mod_early_cov_matrix_25.rdata")
 # load fitted model 
-load("rdata/stan_mort_mod_output_nc_mod_early_cov_matrix.rdata")
+load("rdata/stan_mort_mod_output_nc_mod_early_cov_matrix_25.rdata")
 mod = mod_early
 
 # Summary of the model output using spread_draws or gather_draws (tidybayes package):
@@ -196,11 +196,11 @@ post_early <- mod %>%
          spcoef_b_gr = b_gr + b_gr_sp) %>%
   # remove the sp-level deviation values (not necessary anymore)
   dplyr::select(-c(a_sp, b_dbh_sp, b_gr_sp))
-#save(post_early, file = "rdata/post.mod.early_cov_matrix.rdata")
+#save(post_early, file = "rdata/post.mod.early_cov_matrix_25.rdata")
 
 # model late developed forests ----
 rm(list = ls())
-#load("R Data/data_late_succ.RData")
+#load("rdata/data_late_succ_75.RData")
 data_std <- data_late
 data_std$dbh <- as.numeric(scale(data_std$dbh))
 data_std$gr <- as.numeric(scale(data_std$gr))
@@ -232,7 +232,7 @@ mod_late <- stan(file = "codes/stan_model_for_mortality_probability.stan",
                  init = 0) # does the trick to avoid getting "rejecting initial values" message problems
 
 mod_late %<>% recover_types(data_late) # retrieve original sp and plot names
-# save(mod_late, file = "rdata/stan_mort_mod_output_nc_mod_late_cov_matrix.rdata")
+# save(mod_late, file = "rdata/stan_mort_mod_output_nc_mod_late_cov_matrix_75.rdata")
 
 # load fitted model 
 load("rdata/post.mod.late_cov_matrix.rdata")
@@ -268,7 +268,7 @@ post_late <- mod %>%
          spcoef_b_gr = b_gr + b_gr_sp) %>%
   # remove the sp-level deviation values (not necessary anymore)
   dplyr::select(-c(a_sp, b_dbh_sp, b_gr_sp))
-#save(post_late, file = "rdata/post.mod.late_cov_matrix.rdata")
+#save(post_late, file = "rdata/post.mod.late_cov_matrix_75.rdata")
 
 # final rdata with all posteriors ----
 load("rdata/post.mod.all_cov_matrix.rdata")
