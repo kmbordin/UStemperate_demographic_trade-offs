@@ -27,7 +27,7 @@ library(ggridges) # bayesian plots
 library(magrittr) # pipes and tidy
 library(modelr)   # extract bayesian results
 library(ggforce)  # figures
-set.seed(2024)
+#set.seed(2024) turn on
 
 
 # theme for plots ----
