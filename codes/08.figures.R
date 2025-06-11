@@ -86,9 +86,9 @@ a = predict %>%
                  .point = mean, .interval = qi, .width = 0.9) 
 # Figure:
 b= ggplot(a,aes(gr_raw, pred_m_invl)) +
-  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5, fill = "lightblue") +
+  geom_ribbon(aes(ymin = .lower, ymax = .upper), alpha = 0.5, fill = "#4393C3") +
   geom_line() +
-  labs(x = "Growth rate\n(0 to 0.5 cm yr-¹)",
+  labs(x = "Previous growth rate\n(0 to 0.5 cm yr-¹)",
        y = "Annual mortality \nprobability")+
   mytheme+
   theme_light()+
@@ -111,7 +111,7 @@ Figure2 <- predict_summ %>%
   #                 fill = sp), alpha = 0.5) +
   geom_line(aes(colour = Group), alpha = 0.5) +
   scale_colour_manual(values = c("#009E73", "#D55E00"))+
-  labs(x = "Growth rate\n(0 to 0.5 cm yr-¹)",
+  labs(x = "Previous growth rate\n(0 to 0.5 cm yr-¹)",
        y = "Annual mortality probability")+
   mytheme +
   theme_light()+
@@ -195,9 +195,9 @@ plots <- (f3|(angio.1/gimno.1)) +plot_annotation(tag_levels = c("A"))+ plot_layo
 
 
 # Figure 4 ----
-load("rdata/development.rates.rdata")
-load("rdata/mort.paired.rdata")
-load("rdata/gr.paired.rdata")
+load("rdata/development.rates_4bins.rdata")
+load("rdata/mort.paired_4bins.rdata")
+load("rdata/gr.paired_4bins.rData")
 
 temp_early_rates <- development.rates %>% filter(rate=="early")
 temp_late_rates <- development.rates %>% filter(rate=="late")
@@ -209,10 +209,10 @@ p1 <-  ggplot()+
   my_theme+
   scale_colour_manual(values = c("#009E73", "#D55E00"))+
   labs(x="", y="Annual mortality \nprobability at zero growth", title="Early development")+
-  ylim(0,0.5)+xlim(0.3,1.75)+
-  annotate("text", x = 1.75, y = 0.5, label = "SMA slope = 0.24", hjust = 1)+
-  annotate("text", x = 1.75, y = 0.46, label = "R² = 0.01",hjust = 1)+
-  annotate("text", x = 1.75, y = 0.42, label = "p-value = 0.49",hjust = 1)+
+  ylim(0,0.5)+xlim(0.3,1.6)+
+  annotate("text", x = 1.6, y = 0.5, label = "SMA slope = 0.33", hjust = 1)+
+  annotate("text", x = 1.6, y = 0.46, label = "R² = 0.02",hjust = 1)+
+  annotate("text", x = 1.6, y = 0.42, label = "p-value = 0.49",hjust = 1)+
   theme(plot.title = element_text(hjust = 0.5, size = 12))
 
 p2 <- ggplot()+
@@ -220,13 +220,13 @@ p2 <- ggplot()+
   geom_linerange(temp_late_rates, mapping= aes(x= gr.95th, y= pred_sp_m_invl,xmin = gr.lower, xmax = gr.upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
   geom_point(temp_late_rates, mapping = aes(x= gr.95th, y= pred_sp_m_invl, colour=group), size=1.5) + 
   stat_ma_line(temp_late_rates, mapping = aes(x= gr.95th, y= pred_sp_m_invl),method = "SMA", se=TRUE, colour="black", linetype="dashed")+
-  my_theme+  ylim(0,0.5)+xlim(0.3,1.75)+
+  my_theme+  ylim(0,0.8)+xlim(0.2,1.3)+
   stat_ma_line(method = "SMA", se=TRUE, colour="black")+
   scale_colour_manual(values = c("#009E73", "#D55E00"))+
   labs(x="Maximum growth (cm yr-¹)", y="Annual mortality \nprobability at zero growth", title = "Late development")+
-  annotate("text", x = 1.75, y = 0.5, label = "SMA slope = 0.35", hjust = 1)+
-  annotate("text", x = 1.75, y = 0.46, label = "R² = 0.07",hjust = 1)+
-  annotate("text", x = 1.75, y = 0.42, label = "p-value = 0.07",hjust = 1)+
+  annotate("text", x = 1.3, y = 0.8, label = "SMA slope = 0.53", hjust = 1)+
+  annotate("text", x = 1.3, y = 0.74, label = "R² = 0.17",hjust = 1)+
+  annotate("text", x = 1.3, y = 0.68, label = "p-value = 0.01",hjust = 1)+
   theme(plot.title = element_text(hjust = 0.5, size = 12))
 
 p3 <- ggplot(mort.test, aes(x = variable, y = value, group=sp.late)) + 
@@ -241,7 +241,7 @@ p4 <- ggplot(gr.test, aes(x = variable, y = value, group=sp.early)) +
   geom_point(size = 3, aes(color = group)) + 
   my_theme+ 
   labs(x="Stand development", y="Maximum growth (cm yr-¹)")+
-  annotate("text", x = 1, y = 1.95, label = "*",
+  annotate("text", x = 1, y = 1.45, label = "*",
            colour = "black", size=6, hjust = 0)+
   scale_colour_manual(values = c("#009E73", "#D55E00"))
 
