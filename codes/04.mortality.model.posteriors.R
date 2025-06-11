@@ -14,9 +14,9 @@ data_late
 data_early
 
 # extract model predictions -----
-pred.all = preds(data = data_all,post = post)
-pred.late = preds(data = data_late,post = post_late)
-pred.early = preds(data = data_early,post = post_early)
+pred.all <- preds(data = data_all,post = post)
+pred.late <- preds(data = data_late,post = post_late)
+pred.early <- preds(data = data_early,post = post_early)
 
 # plot posterior mean and CI per species ----
 all = plot_post(pred = pred.all, var = "All species")

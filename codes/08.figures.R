@@ -1,6 +1,7 @@
 ########################################################################
 ####### FIGURES WITHIN THE MANUSCRIPT ##################################
 ########################################################################
+# careful! some plots can take some time to be generated. 
 
 # Figure 1 -----
 Figure1 <- ggplot() +
@@ -30,7 +31,8 @@ Figure1 <- ggplot() +
 
 
 # Figure 2 -----
-load("R Data/filtered_fit.stan.rdata")
+load("rdata/filtered_fit.stan.rdata")
+load("rdata/post.mod.all_cov_matrix.rdata")
 data_std <- data2
 data_std$dbh <- as.numeric(scale(data_std$dbh))
 data_std$gr <- as.numeric(scale(data_std$gr))
@@ -128,13 +130,20 @@ Figure2 <- predict_summ %>%
 
 # Figure 3 
 load("rdata/matrix.trait.preds.RData")
+load("rdata/sp_growth_boot.rdata")
+
+df.analy <- df.analy %>% 
+  mutate(mort.prob = pred_sp_m_invl) %>% 
+  bind_cols(sp.gr.all.boot) %>% 
+  rename(gr.all.low = "2.5%",
+         gr.all.high = "97.5%")
 
 # overall figure
 figure <- ggplot()+
-  geom_linerange(df.analy, mapping= aes(x= q95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
-  geom_linerange(df.analy, mapping= aes(x= q95th, y= mort.prob,xmin = gr.lower, xmax = gr.upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
-  geom_point(df.analy, mapping = aes(x= q95th, y= mort.prob), size=2) +
-  stat_ma_line(df.analy, mapping = aes(x= q95th, y= mort.prob),method = "SMA", se=T, colour="black")+
+  geom_linerange(df.analy, mapping= aes(x= gr.95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_linerange(df.analy, mapping= aes(x= gr.95th, y= mort.prob,xmin = gr.all.low, xmax = gr.all.high), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_point(df.analy, mapping = aes(x= gr.95th, y= mort.prob), size=2) +
+  stat_ma_line(df.analy, mapping = aes(x= gr.95th, y= mort.prob),method = "SMA", se=T, colour="black")+
   ylim(0,0.5)+
   annotate("text", x = 1.6, y = 0.5, label = "SMA slope = 0.35", hjust = 1)+
   annotate("text", x = 1.6, y = 0.48, label = "R² = 0.07",hjust = 1)+
@@ -142,6 +151,8 @@ figure <- ggplot()+
   my_theme
 
 # add Angiosperm data
+angio <- df.analy %>% filter(group=="Angiosperm") 
+
 f2 <- figure + 
   geom_point(angio, mapping = aes(x= gr.95th, y= pred_sp_m_invl, color="#009E73"), size=2) +
   theme(legend.position = "bottom",
@@ -152,8 +163,9 @@ f2 <- figure +
   scale_colour_manual(values = c("#009E73"))
 
 # add Gymnosperm data
+gimno <- df.analy %>% filter(group=="Gymnosperm")
 f3 <- f2 +
-  geom_point(gimno,mapping = aes(x= gr.95th, y= pred_sp_m_invl, color="#D55E00"),size=2)+
+  geom_point(gimno,mapping = aes(x= gr.95th, y= mort.prob, color="#D55E00"),size=2)+
   my_theme +
   scale_colour_manual(values = c("#009E73","#D55E00"))+
   theme(text = element_text(size=15))
@@ -161,8 +173,8 @@ f3
 
 # separate Angiosperm plot
 angio.1 <- ggplot() +
-  geom_linerange(angio, mapping= aes(x= q95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
-  geom_linerange(angio, mapping= aes(x= q95th, y= mort.prob,xmin = gr.lower, xmax = gr.upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_linerange(angio, mapping= aes(x= gr.95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_linerange(angio, mapping= aes(x= gr.95th, y= mort.prob,xmin = gr.all.low, xmax = gr.all.high), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
   geom_point(angio, mapping = aes(x= gr.95th, y= pred_sp_m_invl, color="#009E73"), size=2) +
   my_theme+
   scale_colour_manual(values = c( "#009E73"))+
@@ -176,8 +188,8 @@ angio.1 <- ggplot() +
 
 # separate Gymnosperm plot
 gimno.1 <- ggplot()+
-  geom_linerange(gimno, mapping= aes(x= q95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
-  geom_linerange(gimno, mapping= aes(x= q95th, y= mort.prob,xmin = gr.lower, xmax = gr.upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_linerange(gimno, mapping= aes(x= gr.95th, y= mort.prob,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
+  geom_linerange(gimno, mapping= aes(x= gr.95th, y= mort.prob,xmin = gr.all.low, xmax = gr.all.high), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
   geom_point(gimno,mapping = aes(x= gr.95th, y= pred_sp_m_invl, color="#D55E00"),size=2)+
   my_theme+
   #ylim(0,0.32)+
@@ -219,7 +231,7 @@ p2 <- ggplot()+
   geom_linerange(temp_late_rates, mapping= aes(x= gr.95th, y= pred_sp_m_invl,ymin = .lower, ymax = .upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
   geom_linerange(temp_late_rates, mapping= aes(x= gr.95th, y= pred_sp_m_invl,xmin = gr.lower, xmax = gr.upper), linewidth = 0.5, colour = "grey80") + # colour = sign_gr
   geom_point(temp_late_rates, mapping = aes(x= gr.95th, y= pred_sp_m_invl, colour=group), size=1.5) + 
-  stat_ma_line(temp_late_rates, mapping = aes(x= gr.95th, y= pred_sp_m_invl),method = "SMA", se=TRUE, colour="black", linetype="dashed")+
+  stat_ma_line(temp_late_rates, mapping = aes(x= gr.95th, y= pred_sp_m_invl),method = "SMA", se=TRUE, colour="black")+
   my_theme+  ylim(0,0.8)+xlim(0.2,1.3)+
   stat_ma_line(method = "SMA", se=TRUE, colour="black")+
   scale_colour_manual(values = c("#009E73", "#D55E00"))+

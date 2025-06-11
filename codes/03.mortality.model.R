@@ -4,13 +4,13 @@
 
 # Mortality data -----  
 # DO NOT RUN -----
-# load("R Data/live.RData")
+# load("rdata/live.RData")
 # mort <- live #good data
 # data_200 <- species_list_to_mortality(x = mort,min.n.surv = 200, min.n.mort = 5)
 # fit.stan <- data_200
 
 # Load the data
-# load("R Data/fit.stan.total.rdata")
+# load("rdata/fit.stan.total.rdata")
 # 
 # Growth is already transformed. 
 # Re-generate the raw annualised absolute growth rate values:
@@ -163,7 +163,7 @@ mod_early %<>% recover_types(data_early) # retrieve original sp and plot names
 #save(mod_early, file="rdata/stan_mort_mod_output_nc_mod_early_cov_matrix_25.rdata")
 # load fitted model 
 load("rdata/stan_mort_mod_output_nc_mod_early_cov_matrix_25.rdata")
-mod = mod_early
+mod <- mod_early
 
 # Summary of the model output using spread_draws or gather_draws (tidybayes package):
 mod %>% 
@@ -235,8 +235,8 @@ mod_late %<>% recover_types(data_late) # retrieve original sp and plot names
 # save(mod_late, file = "rdata/stan_mort_mod_output_nc_mod_late_cov_matrix_75.rdata")
 
 # load fitted model 
-load("rdata/post.mod.late_cov_matrix.rdata")
-mod  <- mod_late
+load("rdata/post.mod.late_cov_matrix_75.rdata")
+mod <- mod_late
 
 # Summary of the model output using spread_draws or gather_draws (tidybayes package):
 mod %>% 
@@ -272,5 +272,5 @@ post_late <- mod %>%
 
 # final rdata with all posteriors ----
 load("rdata/post.mod.all_cov_matrix.rdata")
-load("rdata/post.mod.late_cov_matrix.rdata")
-load("rdata/post.mod.early_cov_matrix.rdata")
+load("rdata/post.mod.late_cov_matrix_75.rdata")
+load("rdata/post.mod.early_cov_matrix_25.rdata")

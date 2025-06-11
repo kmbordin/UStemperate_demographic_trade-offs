@@ -26,12 +26,12 @@ model.g <- sma(mort.prob ~ gr.95th, data = gimno)
 summary(model.g)
 
 # early development trade-offs ----
-load("rdata/data_early_succ.RData")
-load("rdata/mortality.probability.at.0gr_EARLY_cov.RData")
+load("rdata/data_early_succ_25.RData")
+load("rdata/mortality.probability.at.0gr_EARLY_cov_25.RData")
 stand <- readRDS("rdata/stand_dev_us.RDS")
 load("rdata/live.RData")
 
-early <- filter (stand, for.dev <= "0.33")
+early <- filter (stand, for.dev <= "0.25")
 early.data = live %>% filter(plot.id %in% early$tmt.plot.id)
 gr_early <- early.data %>% 
   mutate(time.interv = date3-date2,
@@ -72,10 +72,10 @@ model_early <- sma(pred_sp_m_invl ~ gr.95th, data = temp_early_rates)
 summary(model_early)
 
 # late development trade-offs ----
-load("rdata/data_late_succ.RData")
-load("rdata/mortality.probability.at.0gr_LATE_cov.RData")
+load("rdata/data_late_succ_75.RData")
+load("rdata/mortality.probability.at.0gr_LATE_cov_75.RData")
 
-late <- filter (stand, for.dev <= "0.66")
+late <- filter (stand, for.dev >= "0.75")
 late.data = live %>% filter(plot.id %in% late$tmt.plot.id)
 gr_late <- late.data %>% 
   mutate(time.interv = date3-date2,
