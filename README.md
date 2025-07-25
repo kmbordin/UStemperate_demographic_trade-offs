@@ -66,11 +66,11 @@ For specific requests and questions, please send an email to kauanembordin\@gmai
 
     18. `sp_growth.boot.RData`: confidence itervals of 95th percetile of growth rates of species across all stands
 
-    19. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands (very heavy - available upon request)
+    19. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands (careful - very heavy)
 
-    20. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands (very heavy - available upon request)
+    20. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands (careful - very heavy)
 
-    21. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands (very heavy - available upon request)
+    21. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands (careful - very heavy)
 
     22. `stand_dev_us.rds`: plot-level information of development status across all stands
 
@@ -93,7 +93,7 @@ For specific requests and questions, please send an email to kauanembordin\@gmai
         1.  `data.total.csv`: data frame with all the results dataset (see below)
 
             | Variable              | README                                                                                |
-            |----------------------|-------------------------------------------------|
+            |-----------------------|-------------------------------------------------|
             | group                 | phylogenetic clade (Angiosperm or Gymnosperm)                                         |
             | family                | Family                                                                                |
             | genus                 | Genus                                                                                 |
