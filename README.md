@@ -1,13 +1,12 @@
 [![DOI](https://zenodo.org/badge/892592324.svg)](https://doi.org/10.5281/zenodo.14402211)
 
----
----
----
+------------------------------------------------------------------------
 
-### This repository contains all files related to the analyses performed for the manuscript "Disturbance constrains the growth-survival trade-off for temperate tree species", led by Kauane M. Bordin and co-authors.
+### This repository contains all files related to the analyses performed for the manuscript "Growth-survival trade-off in temperate trees is weak and restricted to late-successional stages", led by Kauane M. Bordin
 
-Important information: the raw data is openly available at https://research.fs.usda.gov/products/dataandtools/tools/fia-datamart
-For this manuscript's purposes, the processed data was standardised and harmonised in the context of the TreeMort project (https://more.bham.ac.uk/treemort/).
+Important information: the raw data is openly available at <https://research.fs.usda.gov/products/dataandtools/tools/fia-datamart> For this manuscript's purposes, the processed data was standardised and harmonised in the context of the TreeMort project (<https://more.bham.ac.uk/treemort/>).
+
+For specific requests and questions, please send an email to kauanembordin\@gmail.com
 
 #### *Content of the repository:*
 
@@ -23,11 +22,9 @@ For this manuscript's purposes, the processed data was standardised and harmonis
 
     5.  `05.growth.and.mortality`: generates the 95% confidence intervals of maximum growth and combine the estimated mortality probability in a single file
 
-    6.  `06.phylogenetic.information`: incorporates the phylogenetic information to test for phylogenetic independence
+    6.  `06.trade-offs`: test the relationship between growth and survival across the temperate tree species
 
-    7.  `07.trade-offs`: test the relationship between growth and survival across the temperate tree species
-
-    8.  `08.figures`: generate the four figures presented in the main manuscript file
+    7.  `07.figures`: generate the four figures presented in the main manuscript file
 
         `stan_model_for_mortality_probability.stan`: Bayesian model to estimate the mortality probability at zero growth, using the time census interval *t* as an exponential, and alpha priors as (-1, 2) on logit scale: -3 corresponds to a mort. prob. of 0.04 and 1 to 0.73; see main files for details
 
@@ -35,51 +32,49 @@ For this manuscript's purposes, the processed data was standardised and harmonis
 
     1.  `census1to3.RData`: stem-level three census data
 
-    2.  `data_early_succ.RData`: stem-level data from stands of early development
+    2.  `data_early_succ_25.RData`: stem-level data from stands of early development
 
-    3.  `data_late_succ.RData`: stem-level data from stands of late development
+    3.  `data_late_succ_75.RData`: stem-level data from stands of late development
 
-    4.  `development.rates.RData`: all estimated demographic parameters of species in stands from early and late development
+    4.  `development.rates_4bins.RData`: all estimated demographic parameters of species in stands from early and late development
 
-    5.  `fit.stan.total.RData`: filtered data of all stems to fir stan model
+    5.  `filtered_fit.stan.RData`: filtered data of all stems to fir stan model
 
-    6.  `gr.paired.RData`: paired data of species to test for differences between growth rates in early and late developmental stands
+    6.  `fit.stan.total.RData`: filtered data of all stems to fir stan model
 
-    7.  `live.RData`: first filtered data
+    7.  `gr.paired_4bins.RData`: paired data of species to test for differences between growth rates in early and late developmental stands
 
-    8.  `matrix.trait.preds.RData`: all estimated demographic parameters of species in all stands
+    8.  `live.RData`: first filtered data - alive and dead information
 
-    9.  `mort.paired.RData`: paired data of species to test for differences between mortality probability in early and late developmental stands
+    9.  `mort.paired_4bins.RData`: paired data of species to test for differences between mortality probability in early and late developmental stands
 
     10. `mortality.probability.at.0gr_cov.RData`: estimated demographic parameters of species across all sample
 
-    11. `mortality.probability.at.0gr_EARLY_cov.RData`: estimated demographic parameters of species across early developmental stands
+    11. `mortality.probability.at.0gr_EARLY_cov_25.RData`: estimated demographic parameters of species across early developmental stands
 
-    12. `mortality.probability.at.0gr_LATE_cov.RData`: estimated demographic parameters of species across late developmental stands
+    12. `mortality.probability.at.0gr_LATE_cov_75.RData`: estimated demographic parameters of species across late developmental stands
 
-    13. `phylotree.RData`: phylogenetic tree of 68 species tree species
+    13. `post.mod.all_cov_matrix.RData`: posterior distributions of the mortality probability model across all stands
 
-    14. `post.mod.all_cov_matrix.RData`: posterior distributions of the mortality probability model across all stands
+    14. `post.mod.early_cov_matrix_25.RData`: posterior distributions of the mortality probability model across early stands
 
-    15. `post.mod.early_cov_matrix.RData`: posterior distributions of the mortality probability model across early stands
+    15. `post.mod.late_cov_matrix_75.RData`: posterior distributions of the mortality probability model across late stands
 
-    16. `post.mod.late_cov_matrix.RData`: posterior distributions of the mortality probability model across late stands
+    16. `sp.gr.early.boot.RData`: confidence itervals of 95th percetile of growth rates of species across early developmental stands
 
-    17. `sp.gr.early.boot.RData`: confidence itervals of 95th percetile of growth rates of species across early developmental stands
+    17. `sp.gr.late.boot.RData`: confidence itervals of 95th percetile of growth rates of species across late developmental stands
 
-    18. `sp.gr.late.boot.RData`: confidence itervals of 95th percetile of growth rates of species across late developmental stands
+    18. `sp_growth.boot.RData`: confidence itervals of 95th percetile of growth rates of species across all stands
 
-    19. `sp_growth.boot.RData`: confidence itervals of 95th percetile of growth rates of species across all stands
+    19. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands (very heavy - available upon request)
 
-    20. `stan_mort_mod_output_nc_mod_early_cov_matrix.RData`: stan model output for species across early developmental stands (too heavy)
+    20. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands (very heavy - available upon request)
 
-    21. `stan_mort_mod_output_nc_mod_late_cov_matrix.RData`: stan model output for species across latedevelopmental stands (too heavy)
+    21. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands (very heavy - available upon request)
 
-    22. `stan_mort_mod_output_nc_mod2_cov_matrix.RData`: stan model output for species across all developmental stands (too heavy)
+    22. `stand_dev_us.rds`: plot-level information of development status across all stands
 
-    23. `stand_dev_us.rds`: plot-level information of development status across all stands
-
-    24. `temperate.all.rates.RData`: all estimated demographic parameters of species in all stands
+    23. `temperate.all.rates.RData`: all estimated demographic parameters of species in all stands
 
 3.  `results`: main results from the analyses shown within the manuscript
 
@@ -87,7 +82,7 @@ For this manuscript's purposes, the processed data was standardised and harmonis
 
     2.  `sp.level.range.all.0-0.5cm_groups.png`: Figure 2
 
-    3.  `figure3.png`: Figure 3
+    3.  `figure 3.png`: Figure 3
 
     4.  `early_and_late_developm.png`: Figure 4
 
@@ -98,7 +93,7 @@ For this manuscript's purposes, the processed data was standardised and harmonis
         1.  `data.total.csv`: data frame with all the results dataset (see below)
 
             | Variable              | README                                                                                |
-            |---------------------|---------------------------------------------------|
+            |----------------------|-------------------------------------------------|
             | group                 | phylogenetic clade (Angiosperm or Gymnosperm)                                         |
             | family                | Family                                                                                |
             | genus                 | Genus                                                                                 |
@@ -107,6 +102,7 @@ For this manuscript's purposes, the processed data was standardised and harmonis
             | all.lower.mort.prob   | 2.5% of mortality probability at zero growth for all species                          |
             | all.upper.mort.prob   | 97.5% of mortality probability at zero growth for all species                         |
             | all.95gr              | 95th quantile of growth for all species                                               |
+            | all.sd.gr             | standard deviation of 95th quantile of growth                                         |
             | all.lower.gr          | 2.5% of 95th quantile of growth for all species                                       |
             | all.upper.gr          | 97.5% of 95th quantile of growth for all species                                      |
             | late.mort.prob        | Mortality probability at zero growth for species in late development stands           |
