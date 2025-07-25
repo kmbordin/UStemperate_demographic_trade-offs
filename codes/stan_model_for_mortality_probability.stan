@@ -85,7 +85,7 @@ model {
   // a_interval_z ~ normal(0, 1);
   
   // Priors on hyperparameters for varying effects:
-  target += normal_lpdf(a | -1, 2);  // hyperprior on the grand mean in a_sp ~ normal(a, sigma_a_sp), on logit scale: -3 corresponds to a mort. prob. of 0.04 and 1 to 0.73
+  target += normal_lpdf(a | -1, 2);  // hyperprior on the grand mean in a_sp ~ normal(a, sigma_a_sp), on logit scale: (-1)+-2 =  -3 corresponds to a mort. prob. of 0.04 and 1 to 0.73
 
   target += normal_lpdf(b_dbh | 0, 1);  
   target += normal_lpdf(b_gr | 0, 1);  
@@ -106,7 +106,7 @@ model {
     p_logit = a + u_sp[sp[i], 1] + (b_dbh + u_sp[sp[i], 2]) .* dbh[i] + (b_gr + u_sp[sp[i], 3]) .* gr[i] + 
                 a_plot[plot[i]];// + a_interval[interval[i]];
     p = inv_logit(p_logit);
-    // surv[i] ~ bernoulli(p^time[i]); // When modelling survival (surv: 1 = survided; 0 = died); Where p is the survival probability
+    // surv[i] ~ bernoulli(p^time[i]); // When modelling survival (surv: 1 = survided; 0 = died); Where p is the survival probability - in our case we modelled mortality, see next line
     target += bernoulli_lpmf(mort[i] | 1-((1-p)^time[i]));  // When modelling mortality (mort: 1 = died; 0 = survived); Where p is the death probability
   }
 }

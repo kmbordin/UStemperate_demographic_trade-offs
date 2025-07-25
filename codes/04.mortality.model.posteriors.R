@@ -1,7 +1,7 @@
 ########################################################################
 ####### EXTRACT MORTALITY PROBABILITIES ################################
 ########################################################################
-# r datas ----
+# RData with mortality probability estimates ----
 load("rdata/post.mod.all_cov_matrix.rdata")
 load("rdata/post.mod.late_cov_matrix_75.rdata")
 load("rdata/post.mod.early_cov_matrix_25.rdata")

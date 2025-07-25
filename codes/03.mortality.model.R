@@ -3,7 +3,7 @@
 ########################################################################
 
 # Mortality data -----  
-# DO NOT RUN -----
+# DO NOT RUN  - lazy and large memory requirement; use the RData! -----
 # load("rdata/live.RData")
 # mort <- live #good data
 # data_200 <- species_list_to_mortality(x = mort,min.n.surv = 200, min.n.mort = 5)
@@ -68,8 +68,8 @@ compose$x <- matrix(c(rep(1, nrow(data_std)),
                       data_std$gr), ncol = 3)
 compose$K <- ncol(compose$x)
 # 
-# Careful - this might be (very) lazy ------
-# Build the survival model - see corresponding stan file -----
+# MORTALITY PROBABILITY estimates; Careful - this might be very lazy and requires a lot of memory; use the RData!  ------
+# Build the survival model - see corresponding stan file --
 
 # Sampler parameters
 n_iter <- 2000
@@ -94,7 +94,7 @@ mod2 <- stan(file = "codes/stan_model_for_mortality_probability.stan",
 mod2 %<>% recover_types(data) # retrieve original sp and plot names
 
 # load fitted model 
-load("codes/stan_mort_mod_output_nc_mod2_cov_matrix.rdata")
+load("rdata/stan_mort_mod_output_nc_mod2_cov_matrix.rdata")
 mod = mod2
 
 # Summary of the model output:
@@ -132,7 +132,7 @@ post <- mod2 %>%
 # save(post, file = "rdata/post.mod.all_cov_matrix.rdata")
 
 
-# model early developed forests -----
+#  MORTALITY PROBABILITY estimates: model for early developed forests; Careful - this might be very lazy and requires a lot of memory; use the RData" -----
 rm(list = ls())
 # load("rdata/data_early_succ_25.RData")
 data_std <- data_early
@@ -198,7 +198,7 @@ post_early <- mod %>%
   dplyr::select(-c(a_sp, b_dbh_sp, b_gr_sp))
 #save(post_early, file = "rdata/post.mod.early_cov_matrix_25.rdata")
 
-# model late developed forests ----
+# MORTALITY PROBABILITY estimates: model for late developed forests; Careful - this might be very lazy and requires a lot of memory; use the RData" ----
 rm(list = ls())
 #load("rdata/data_late_succ_75.RData")
 data_std <- data_late

@@ -18,17 +18,17 @@ df <- data.frame(tag = census1$tmt.tree.id, #treeid
                  pom1 = census1$pom, #point of measurement
                  pom2 = census2$pom, 
                  pom3 = census3$pom, 
-                 DFstatus1 = census1$tree.status, 
+                 DFstatus1 = census1$tree.status, #0= alive; 1= dead
                  DFstatus2 = census2$tree.status, 
-                 DFstatus3 = census3$tree.status, #0= alive; 1= dead
-                 database.code = census1$database.code, #code
+                 DFstatus3 = census3$tree.status, 
+                 database.code = census1$database.code, # database code
                  plot.id = census1$tmt.plot.id) #plot.id
 
 df <- df %>%
-  mutate(pom1 = as.numeric(pom1),
+  mutate(pom1 = as.numeric(pom1), 
          pom2 = as.numeric(pom2),
          pom3 = as.numeric(pom3)) %>%
-  mutate(pom2 = coalesce(pom2,pom1)) %>%
+  mutate(pom2 = coalesce(pom2,pom1)) %>% # fill missing info
   mutate(pom3 = coalesce(pom3,pom1)) %>%
   mutate(dbh1 = dbh1/10, # convert dbh to cm if the data are in mm
          dbh2 = dbh2/10,

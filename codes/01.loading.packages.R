@@ -4,30 +4,25 @@
 rm(list = ls())
 
 # loading packages -----
-library(tidyverse)  #tidy data
+library(tidyverse)  # tidy data
 library(data.table) # for data organisation
-library(reshape2) # for data organisation 
-library(FD)       # for functional metrics
-library(vegan)    # for multivariate analysis
-library(here)     # for loading data
-library(lme4)     # for linear models
-library(MuMIn)    # for multimodel inference
-library(doBy)     # to summarise data
-library(smatr)		# for MA/SMA regression
-library(performance) # for glm diagnostics
-library(boot)     #for regressions
-library(MASS)     # AIC
-library(ggpubr)   # for plots
-library(tidyr)    # unnest lists
-library(patchwork)# plots organisation
-library(ggpmisc)  # SMA model fit
-library(rstan)    # stan code to estimate mortality
-library(tidybayes)# bayesian results in tidy format
-library(ggridges) # bayesian plots
-library(magrittr) # pipes and tidy
-library(modelr)   # extract bayesian results
-library(ggforce)  # figures
-#set.seed(2024) turn on
+library(reshape2)   # for data organisation 
+library(here)       # for loading data
+library(doBy)       # to summarise data
+library(smatr)		  # for MA/SMA regression
+library(boot)       # for regressions
+library(ggpubr)     # for plots
+library(tidyr)      # unnest lists
+library(patchwork)  # plots organisation
+library(ggpmisc)    # SMA model fit
+library(rstan)      # stan code to estimate mortality
+library(tidybayes)  # bayesian results in tidy format
+library(ggridges)   # bayesian plots
+library(magrittr)   # pipes and tidy
+library(modelr)     # extract bayesian results
+library(ggforce)    # figures
+library(dplyr)      # data manipulation
+set.seed(2024)      # turn on to generate the same result in permutations
 
 
 # theme for plots ----
@@ -50,17 +45,6 @@ my_theme <- theme_light() +
          text = element_text(size=10),
          plot.margin=unit(c(0, 0, 0 , 0), "cm"))
 
-# test phylogenetic independence -----
-phylo.need <- function (data, trait, group, phy){
-  # data = data
-  # trait = trait of interest
-  # group = Angiosperm or Gymnosperm
-  # phy = phylogenetic correlation matrix under Brownian Motion
-  
-  with.phylo <- gls (mort.prob ~ trait+group, correlation = phy, data= data, na.action=na.omit)
-  without.phylo <- gls (mort.prob ~ trait+group, data= data, na.action=na.omit)
-  print (AIC(with.phylo, without.phylo))
-}
 
 # filter species to run mortality rates ----
 species_list_to_mortality <- function (x, min.n.surv, min.n.mort) {
@@ -70,13 +54,13 @@ species_list_to_mortality <- function (x, min.n.surv, min.n.mort) {
   
   # info of surviving stems
   splist.surv <- x %>%
-    filter(DFstatus3 ==0) %>% # zero is alive
+    filter(DFstatus3 ==0) %>% # stem status; zero is alive
     count(sp) %>%
     filter(n >= min.n.surv) # filter only the species that meet the threshold
   
   # info of dead stems
   splist.mort <- x %>%
-    filter(DFstatus3 ==1) %>% # one is dead
+    filter(DFstatus3 ==1) %>% # stem status; one is dead
     count(sp) %>%
     filter(n >= min.n.mort) # filter only the species that meet the threshold
   
@@ -92,7 +76,7 @@ species_list_to_mortality <- function (x, min.n.surv, min.n.mort) {
   table <- data.frame(tag = x$tag, # tag info
                       sp = x$sp, # species info
                       plot = x$plot.id, # plot id info
-                      mort = x$DFstatus3,# maintain the code of 1 for dead stems and 0 for live
+                      mort = x$DFstatus3,# stem status; maintain the code of 1 for dead stems and 0 for live
                       dbh2 = x$dbh2,# previous dbh (census 2)
                       time.growth = x$date2-x$date1) %>% # time interval from census 1 to 2
     mutate(prev.growth = (x$dbh2-x$dbh1)/time.growth, # previous growth (census2-census1)
@@ -165,9 +149,8 @@ preds <-  function (data, post){
     left_join(grid) %>% 
     # Prediction per species (using species-level parameters (hyperparam + sp deviation) only):
     mutate(pred_sp = spcoef_a + spcoef_b_dbh * dbh + spcoef_b_gr * gr) %>% 
-    # IF we work from the MORTALITY model (otherwise silence the line below):
     rename(pred_sp_m = pred_sp) %>% 
-    mutate(pred_sp_m_invl = inv.logit(pred_sp_m)) %>% 
+    mutate(pred_sp_m_invl = inv.logit(pred_sp_m)) %>% # inverse logit to probability scale
     # back-transform covariate, if they were standardised prior to running the model:
     mutate(dbh_raw = (dbh * sd(data$dbh)) + mean(data$dbh),
            dbh_raw = exp(dbh_raw),
@@ -182,8 +165,8 @@ preds <-  function (data, post){
   
 } 
 # plotting model posteriors ----
-plot_post = function(pred,var){
-  # pred = predictios extracted from the model posteriors
+plot_post <- function(pred,var){
+  # pred = predictions extracted from the model posteriors
   # var = corresponding variable
   pred %>% 
     ggplot(aes(pred_sp_m_invl, sp)) +
